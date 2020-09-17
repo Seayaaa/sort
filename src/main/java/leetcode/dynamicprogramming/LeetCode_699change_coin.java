@@ -6,6 +6,7 @@ import java.util.Arrays;
  * @author lsy
  * @version 1.0
  * @date 2020/9/17 14:16
+ * @site https://leetcode-cn.com/problems/coin-change/
  * @Desc 描述
  * 322. 零钱兑换
  * 给出不同面额的硬币以及一个总金额. 写一个方法来计算给出的总金额可以换取的最少的硬币数量. 如果已有硬币的任意组合均无法与总金额面额相等, 那么返回 -1.
@@ -42,8 +43,7 @@ public class LeetCode_699change_coin {
                     if (coins[j] <= i) {
                         dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
                     }
-                }
-            }
+                } }
             return dp[amount] > amount ? -1 : dp[amount];
         }
 
