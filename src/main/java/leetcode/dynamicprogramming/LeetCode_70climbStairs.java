@@ -38,14 +38,18 @@ public class LeetCode_70climbStairs {
     // 循环
     public int climbStairs(int n) {
         if (n < 1) {
-            return -1;
+            return 0;
         }
         if (n == 1) {
             return 1;
         }
-        int p,q = 0;
-        int r = 1;
-        for (int i=1;i<=n;i++) {
+        if (n == 2) {
+            return 2;
+        }
+        int p = 1;
+        int q = 2;
+        int r = 3;
+        for (int i=3;i<=n;i++) {
             p = q;
             q = r;
             r = p + q;
