@@ -1,5 +1,7 @@
 package leetcode.dynamicprogramming;
 
+import java.util.Arrays;
+
 /**
  * @author lsy
  * @version 1.0
@@ -19,40 +21,44 @@ public class DigForGold {
     // f(n,w) = g[0]               (n==1 & w>=p[0])
     // f(n,w) = f(n-1,w)           (n>1  & w<p[n])
     // f(n,w) = max(f(n-1,w), f(n-1,w-p[n]) + g[n])     (n>1 & w=>p[n])
+    // result[j] = Math.max(preResult[j], preResult[j-p[i-1]] + g[i-1]);
 
-    public int mostGold(int n, int w, int[] g, int[] p) {
-        int[] preResult = new int[w];
-        int[] result = new int[w];
-        for (int i=0;i<p.length;i++) {
+    public static int mostGold(int n, int w, int[] g, int[] p) {
+        // 数组下标即代表，当前可用人数
+        int[] preResult = new int[w+1];
+        int[] result = new int[w+1];
+        for (int i=1;i<=w;i++) {
             if (i < p[0]) {
                 preResult[i] = 0;
             } else {
                 preResult[i] = g[0];
             }
         }
-        for (int i=0;i<n;i++) {
-            for (int j=0;j<w;j++) {
-                if (j < p[i]) {
-                    result[j] = preResult[j];
+        System.out.println(Arrays.toString(preResult));
+        // 第一座金矿已赋值完毕
+        // 从2座金矿开始
+        for (int i=2;i<=n;i++) {
+
+            for (int j=1;j<=w;j++) {
+                // 当前人数足够去挖该金矿
+                if (j >= p[i-1]) {
+                    // 取，挖该金矿和不挖该金矿，最大值
+                    result[j] = Math.max(preResult[j], preResult[j-p[i-1]] + g[i-1]);
                 } else {
-                    result[j] = Math.max(preResult[j], preResult[j-p[i]] + g[i]);
+                    // 人手不够，只能选择不挖该金矿
+                    result[j] = preResult[j];
                 }
             }
-            preResult = result;
+            System.out.println("res:"+Arrays.toString(result));
+            // 将当前金矿数所能挖取最大金子的值，保存到preResult里面，下次循环再去计算i++金矿数所能挖取最大金子的值
+            preResult = Arrays.copyOf(result,11);
         }
-        return result[n];
-//        if (n <= 1 && w < p[n-1]) {
-//            return  0;
-//        }
-//        if (n == 1 && w > p[n-1]) {
-//            return g[n-1];
-//        }
-//        if (n > 1 && w < p[n-1]) {
-//            return mostGold(n-1, w, g, p);
-//        }
-//        if (n > 1 && w >= p[n-1]) {
-//            return Math.max(mostGold(n-1, w, g, p), mostGold(n-1, w - p[n-1], g, p) + g[n-1]);
-//        }
-//        return 0;
+        // 取最后5金矿10人数的结果，即最大采金量
+        return result[w];
+    }
+
+    public static void main(String[] args) {
+        int i = mostGold(5, 10, new int[]{400,500,200,300,350}, new int[]{5,5,3,4,3});
+        System.out.println(i);
     }
 }
