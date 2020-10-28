@@ -48,24 +48,22 @@ public class Traversal {
 
     
     
-    // no 递归   https://blog.csdn.net/z_ryan/article/details/80854233
+    // no 递归   https://blog.csdn.net/qq_38134165/article/details/79871430
     public void preOrderNoRecursive(TreeNode node) {
         if (node == null) {
             return;
         }
         TreeNode p = node;
         Stack<TreeNode> stack = new Stack<>();
-        while(!stack.empty() || p != null) {
+        while (!stack.empty() || p != null) {
             // 将左边节点压入栈，直到最左下
-            while(p != null) {
+            while (p != null) {
+                System.out.println(p.val);
                 stack.push(p);
                 p = p.leftNode;
             }
-            if (!stack.isEmpty()) {
-                p = stack.peek();
-                System.out.println(p.val);
-                p = p.rightNode;
-            }
+            p = stack.pop();
+            p = p.rightNode;
         }
     }
     

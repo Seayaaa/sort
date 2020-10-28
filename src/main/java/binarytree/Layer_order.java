@@ -29,4 +29,9 @@ public class Layer_order {
     public void layerOrder1(TreeNode root) {
         
     }
+
+
+    public static void main(String[] args) {
+        System.out.println(Math.pow(2,0));
+    }
 }
