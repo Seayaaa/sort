@@ -46,4 +46,13 @@ public class BuildTree {
         }
         return null;
     }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        root.val = 1;
+        TreeNode current = root;
+        current.val = 101;
+        System.out.println(root.val);
+        System.out.println(current.val);
+    }
 }

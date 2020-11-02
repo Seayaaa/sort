@@ -101,7 +101,7 @@ public class Traversal {
             cur = stack.peek();
             if (cur.rightNode != null && cur.rightNode != last) {
                 cur = cur.rightNode;
-            }else if (cur.rightNode == null && cur.rightNode == last) {
+            }else if (cur.rightNode == null || cur.rightNode == last) {
                 System.out.println(cur.val);
                 last = cur;
                 stack.pop();
