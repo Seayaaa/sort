@@ -22,7 +22,7 @@ public class TenToBinary {
     }
 
     public static void main(String[] args) {
-        Transform_to_Binary1(10);
+        Transform_to_Binary1(1024);
         
     }
 }
